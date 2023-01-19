@@ -4,6 +4,7 @@ Creating benchmark cases to quantify the performance of different implementation
 ## Setup
 - export BOOST_PATH={PATH_TO_BOOST_LIB}
 - install pandas and pytest in Python
+- GCC compiler
 
 ## Test Run
 ```pytest testrun.py::test_single -s``` running single trial test  
