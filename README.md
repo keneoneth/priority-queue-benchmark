@@ -1,17 +1,17 @@
 # priority-queue-benchmark
 Creating benchmark cases to quantify the performance of different implementations of priority queues
 
-## setup
-export BOOST_PATH={PATH_TO_BOOST_LIB}
-install pandas and pytest in Python
+## Setup
+- export BOOST_PATH={PATH_TO_BOOST_LIB}
+- install pandas and pytest in Python
 
-## test run
-```pytest testrun.py::test_single -s``` running single trial test
-```pytest testrun.py::test_simple_I -s``` running simple cases in TEST I
-```pytest testrun.py::test_simple_II -s``` running simple cases in TEST II
-```pytest testrun.py::test_I -s``` slower, running all cases in TEST I
-```pytest testrun.py::test_II -s``` slower, running all cases in TEST II
-```pytest testrun.py::test_all -s``` slower, running all cases available
+## Test Run
+```pytest testrun.py::test_single -s``` running single trial test  
+```pytest testrun.py::test_simple_I -s``` running simple cases in TEST I  
+```pytest testrun.py::test_simple_II -s``` running simple cases in TEST II  
+```pytest testrun.py::test_I -s``` slower, running all cases in TEST I  
+```pytest testrun.py::test_II -s``` slower, running all cases in TEST II  
+```pytest testrun.py::test_all -s``` slower, running all cases available  
 
 test result csv is generated to the results folder
 
