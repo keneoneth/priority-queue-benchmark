@@ -74,7 +74,7 @@ test result csv is generated to the results folder
 |D   |I   |vi |100000000|680102502      |680102.502     |680.102502           |
 
 
-#### test_simple_II_result.csv
+#### test_II_result.csv
 
 |cand|type|id |size     |elapsed_time_us|elapsed_time_ms|elapsed_time_s       |
 |----|----|---|---------|---------------|---------------|---------------------|
