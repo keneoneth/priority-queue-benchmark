@@ -59,7 +59,7 @@ typedef NODE_M value_type;
 #if defined(TCAND_A)
 using chosen_pri_queue = std::priority_queue<value_type,vector<value_type>,greater<value_type>>;
 #elif defined(TCAND_B)
-using chosen_pri_queue = boost::heap::pairing_heap<value_type,boost::heap::compare<compare_node>>;
+using chosen_pri_queue = boost::heap::pairing_heap<value_type,boost::heap::compare<compare_item<value_type>>>;
 #elif defined(TCAND_C)
 using chosen_pri_queue = pairing_heap_priqueue<value_type>;
 #elif defined(TCAND_D)

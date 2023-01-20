@@ -52,9 +52,10 @@ bool operator!=(const NODE_M &x, const NODE_M &y)
    return x.node != y.node;
 }
 
-struct compare_node
+template <typename T>
+struct compare_item
 {
-    bool operator()(const NODE_M& n1, const NODE_M& n2) const
+    bool operator()(const T& n1, const T& n2) const
     {
         return n1 > n2;
     }
