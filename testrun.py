@@ -9,22 +9,24 @@ RESULT_PATH = "results"
 
 res_path = lambda report : os.path.join(RESULT_PATH,report)
 
-def parse_out_to_dict(out):
+def parse_out_to_dict(out,need_s=False,prec=4):
     ret = {}
     for line in out:
         if line.startswith("[TEST]"):
             d = eval(line[len("[TEST]"):])
             ret.update(d)
     if "elapsed_time_us" in ret:
-        ret["elapsed_time_ms"] = [ret["elapsed_time_us"][0]/1000]
+        ret["elapsed_time_ms"] = [round(ret["elapsed_time_us"][0]/1000,prec)]
+        if need_s:
+            ret["elapsed_time_s"] = [round(ret["elapsed_time_ms"][0]/1000,prec)]
     return pd.DataFrame(ret)
 
-def run_test(tcand,ttype,tid):
+def run_test(tcand,ttype,tid,need_s=False):
     cmd = f"make clean && make run cand={tcand} type={ttype} id={tid}"
     print(f"cmd: {cmd}")
     try:
         out = subprocess.check_output(cmd,shell=True).decode('utf-8').split('\n')
-        out = parse_out_to_dict(out)
+        out = parse_out_to_dict(out,need_s)
     except:
         out = parse_out_to_dict({})
     return out
@@ -36,7 +38,7 @@ def test_all():
     for tcand in TEST_CAND_ARR:
         for ttype in TEST_TYPE:
             for tid in TEST_ID:
-                out = run_test(tcand,ttype,tid)
+                out = run_test(tcand,ttype,tid,need_s=True)
                 out_arr.append(out)
     result = pd.concat(out_arr)
     result.to_csv(res_path(report_name),index=False)
@@ -50,7 +52,7 @@ def test_I():
     for tcand in TEST_CAND_ARR:
         ttype = 'I'
         for tid in TEST_ID:
-            out = run_test(tcand,ttype,tid)
+            out = run_test(tcand,ttype,tid,need_s=True)
             out_arr.append(out)
     result = pd.concat(out_arr)
     result.to_csv(res_path(report_name),index=False)
@@ -63,8 +65,8 @@ def test_II():
     out_arr = []
     for tcand in TEST_CAND_ARR:
         ttype = 'II'
-        for tid in TEST_ID:
-            out = run_test(tcand,ttype,tid)
+        for tid in TEST_ID[:-1]:
+            out = run_test(tcand,ttype,tid,need_s=True)
             out_arr.append(out)
     result = pd.concat(out_arr)
     result.to_csv(res_path(report_name),index=False)
@@ -103,8 +105,8 @@ def test_single():
     func_name = "test_single"
     report_name = f"{func_name}_result.csv"
     out_arr = []
-    tcand = 'D'
-    ttype = 'II'
+    tcand = 'A'
+    ttype = 'I'
     tid = 'i'
     out = run_test(tcand,ttype,tid)
     out_arr.append(out)
