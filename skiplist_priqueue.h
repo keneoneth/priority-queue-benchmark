@@ -1,3 +1,6 @@
+#ifndef SKIPLIST_PRIQUEUE
+#define SKIPLIST_PRIQUEUE
+
 #include <bits/stdc++.h>
 
 // Class to implement node
@@ -204,3 +207,5 @@ void skip_list_priqueue<key_type>::displayList()
 		std::cout << std::endl;
 	}
 };
+
+#endif //SKIPLIST_PRIQUEUE
